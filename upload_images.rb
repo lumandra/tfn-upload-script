@@ -20,7 +20,7 @@ class UploadImage
   end
 
   def upload_image_to_s3
-    `s3cmd sync #{@pwd}/ s3://thefemalenude/#{@directory}`
+    `s3cmd sync #{@pwd}/ s3://thefemalenude-production/#{@directory}`
 
     delete_not_image_file if @not_images.any?
 
@@ -70,7 +70,7 @@ class UploadImage
     @not_images.each do |ni|
       name = ni.split(/\//).last
       unless name == '.' || name == '..'
-        `s3cmd del s3://thefemalenude/#{@directory}#{name}`
+        `s3cmd del s3://thefemalenude-production/#{@directory}#{name}`
       end
     end
   end
